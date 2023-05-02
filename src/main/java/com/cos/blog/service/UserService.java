@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.cos.blog.model.RoleType;
 import com.cos.blog.model.Users;
+import com.cos.blog.repository.CheckUserRepository;
 import com.cos.blog.repository.UserRepository;
 
 @Service
@@ -15,6 +16,9 @@ public class UserService {
 
 	@Autowired
 	private UserRepository userRepository;
+	
+	@Autowired
+	private CheckUserRepository checkUserRepository;
 
 	@Autowired
 	private BCryptPasswordEncoder encodeer;
@@ -29,6 +33,13 @@ public class UserService {
 		userRepository.save(user);
 	}
 	
+	// 아이디 중복체크
+	@Transactional
+	public Users 중복체크(String username) {
+		Users check = checkUserRepository.findByUsername(username);
+		return check;
+	}
+	
 	// 회원정보 수정
 	@Transactional
 	public void 회원수정(Users user) {
@@ -37,8 +48,11 @@ public class UserService {
 		});
 		String rawPassword = user.getPassword();
 		String encPassword = encodeer.encode(rawPassword);
-		persistance.setPassword(encPassword);
-		persistance.setEmail(user.getEmail());
+		persistance.setPassword(encPassword);		
+		persistance.setUsername2(user.getUsername2());
+		persistance.setBirth(user.getBirth());
+		persistance.setAddress(user.getAddress());
+		persistance.setTel(user.getTel());
 	}
 
 }
