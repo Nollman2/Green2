@@ -16,7 +16,7 @@ public class MainController {
 	@Autowired BoardService boardService;
 
 	@GetMapping("/")
-	public String index(Model model,@PageableDefault(size= 3, sort = "id",
+	public String index(Model model,@PageableDefault(size= 5, sort = "id",
 			direction = Sort.Direction.DESC) Pageable pageable) {
 		//id기준으로 3개씩 페이징해서 보여줌		
 		

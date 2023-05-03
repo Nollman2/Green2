@@ -219,7 +219,7 @@ let index ={
 			dataType:"json"
 			
 		}).done(function(resp){	
-			alert(resp.data);			
+			alert("ID : "+resp.data);			
 			location.href="/auth/loginForm";
 		}).fail(function(error){
 			alert(JSON.stringify(error));

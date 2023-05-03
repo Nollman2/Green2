@@ -34,6 +34,7 @@ let index = {
 		});
 	},
 	
+	
 	delete : function() {		
 		let id=$("#id").text();		/*#id는 spen에 있는 text*/
 		
@@ -51,6 +52,7 @@ let index = {
 						
 	},
 	
+		
 	update : function() {
 		let id=$("#id").val();		/*#id는 input에 있는 value*/ 
 		let data={
@@ -74,6 +76,7 @@ let index = {
 						
 	},
 	
+	
 	replySave : function() {
 		
 		let data = {			
@@ -84,7 +87,7 @@ let index = {
 		
 		$.ajax({
 			type:"POST",
-			url: `/board/${data.boardId}/reply`, 			
+			url: `/board/${data.boardId}/reply0`, 			
 			data:JSON.stringify(data),
 			contentType:"application/json; charset=utf-8",
 			dataType:"json"

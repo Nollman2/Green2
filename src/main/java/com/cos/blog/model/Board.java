@@ -3,6 +3,7 @@ package com.cos.blog.model;
 import java.sql.Timestamp;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -63,8 +64,10 @@ public class Board {
     //Reply테이블을 List로 통째로 들고옴
     //Reply는 many임으로 List를 통해 들고온다
     //Board와 Reply의 관계는 Board가 주인임 
+    //mappedBy를 통해 연관관계의 주인을 표시
     //mappedBy="board"를 통해 연결시켜줌 이때 "board"의 값은 Reply테이블의 Board테이블의 이름 board를 쓴다
-    @OneToMany(mappedBy="board") //mappedBy 연관관계의 주인이 아님
+    //cascade=CascadeType.REMOVE  //Board테이블이 삭제될때 reply테이블까지 함께 삭제됨
+    @OneToMany(mappedBy="board", fetch=FetchType.EAGER, cascade=CascadeType.REMOVE)
     @JsonIgnoreProperties({"board"}) //무한참조 방지
     @OrderBy("id desc") //id순으로 정렬
     private List<Reply> reply;

@@ -91,7 +91,7 @@ public class BoardService {
 		Reply reply2 = new Reply();
 		reply2.update(user, board, replySaveRequestDto.getContent());
 				
-		replyRepository.save(reply2);		
+		replyRepository.save(reply);		
 	}
 	
 	//댓글쓰기(Dto미사용)
