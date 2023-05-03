@@ -1,10 +1,16 @@
 package com.cos.blog.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.cos.blog.service.UserService;
+
 @Controller //jsp파일을 넘겨주므로 Controller를 사용 //데이터를 넘겨줄때는 RestController
 public class UserController {
+	
+	@Autowired
+	private UserService userService;
 	
 	//회원가입페이지
 	@GetMapping("/auth/joinForm") //localhost:8008/auth/joinForm의 주소로 요청시
@@ -22,12 +28,27 @@ public class UserController {
 	@GetMapping("/auth/loginForm")
 	public String loginForm() {		
 		return "user/loginForm";
-	}
+	}	
 
 	//회원수정페이지
 	@GetMapping("/user/updateForm")
 	public String updateForm() {		
 		return "user/updateForm";
 	}
+	
+	//아이디찾기페이지
+	@GetMapping("/auth/findId")
+	public String fidId() {
+		return "user/findId";
+	}
+	
+
+	//비밀번호재발급페이지
+	@GetMapping("/auth/findpwd")
+	public String fidpwd() {
+		return "user/findpwd";
+	}
+	
+	
 
 }

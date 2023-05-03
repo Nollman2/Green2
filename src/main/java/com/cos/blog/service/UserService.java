@@ -53,6 +53,20 @@ public class UserService {
 		persistance.setBirth(user.getBirth());
 		persistance.setAddress(user.getAddress());
 		persistance.setTel(user.getTel());
+		persistance.setEmail(user.getEmail());
+	}		
+	
+	// 아이디찾기
+	public Users 아이디찾기(Users user) {		
+		
+		String username2 = user.getUsername2();
+		String email = user.getEmail();		
+
+		return userRepository.findByUsername2AndEmail(username2, email).orElseThrow(() -> {
+			return new IllegalArgumentException("아이디 찾기 실패");
+
+		});
 	}
+	
 
 }

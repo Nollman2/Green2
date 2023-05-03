@@ -8,7 +8,8 @@ import com.cos.blog.model.Users;
 
 public interface UserRepository extends JpaRepository<Users,Integer>{
 
-	Optional<Users> findByUsername(String username);
-	
+	Optional<Users> findByUsername(String username);	
+
+	Optional<Users> findByUsername2AndEmail(String username2, String email);
 	
 }

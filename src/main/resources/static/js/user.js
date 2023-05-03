@@ -8,6 +8,9 @@ let index ={
 		$("#btn-update").on("click",()=>{					
 			this.update();
 		});
+		$("#btn-findId").on("click",()=>{					
+			this.findId();
+		});
 	},
 	
 	saveCheck: function() {
@@ -199,7 +202,31 @@ let index ={
 			alert(JSON.stringify(error));
 		});
 						
-	}
+	},
+	
+	findId: function() {
+		
+		let data={			
+			username2 : $("#username2").val(),			
+			email: $("#email").val()
+		};					
+		
+		$.ajax({						
+			type:"POST",
+			url:"/auth/id/search",
+			data:JSON.stringify(data),
+			contentType:"application/json; charset=utf-8",
+			dataType:"json"
+			
+		}).done(function(resp){	
+			alert(resp.data);			
+			location.href="/auth/loginForm";
+		}).fail(function(error){
+			alert(JSON.stringify(error));
+		});
+				
+	},
+	
 	
 	
 }

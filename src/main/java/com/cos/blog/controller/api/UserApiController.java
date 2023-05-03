@@ -65,4 +65,15 @@ public class UserApiController {
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
 		
 	}
+	
+	// 아이디찾기
+	@PostMapping("/auth/id/search")
+	public ResponseDto<String> 아이디찾기(@RequestBody Users user) {		
+		
+		String i = null;
+		userService.아이디찾기(user);				
+		i = userService.아이디찾기(user).getUsername();
+		
+		return new ResponseDto<String>(HttpStatus.OK.value(), i);
+	}
 }

@@ -15,6 +15,15 @@
 			<label class="form-check-label"> <input class="form-check-input" type="checkbox"> Remember me
 			</label>
 		</div> 
+		
+		<div id="findinfo">
+			
+			<div>
+				<a href="/auth/findId">아이디찾기</a><br/>
+				<a href="/auth/findpwd">비밀번호찾기</a><br/><br/>
+			</div>
+		</div>
+		
 		<button id="btn-login" class="btn btn-primary">로그인</button>
 	</form>
 	

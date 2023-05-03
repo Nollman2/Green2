@@ -57,7 +57,7 @@ public class BoardApiController {
 	}
 	
 	//댓글쓰기(Dto미사용)	
-	//한번에 많은자료를 넣을 때 Dto를 사용안하면 코드가 지저분해 짐
+	//한번에 다양한 자료를 넣을 때 Dto를 사용안하면 코드가 지저분해 짐
 	@PostMapping("/board/{boardId}/reply0")
 	public ResponseDto<Integer> replySave(@PathVariable int boardId, @RequestBody Reply reply, @AuthenticationPrincipal PrincipalDetail principal) {
 		
