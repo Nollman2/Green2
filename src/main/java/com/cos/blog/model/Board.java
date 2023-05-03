@@ -13,10 +13,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -62,6 +65,8 @@ public class Board {
     //Board와 Reply의 관계는 Board가 주인임 
     //mappedBy="board"를 통해 연결시켜줌 이때 "board"의 값은 Reply테이블의 Board테이블의 이름 board를 쓴다
     @OneToMany(mappedBy="board") //mappedBy 연관관계의 주인이 아님
+    @JsonIgnoreProperties({"board"}) //무한참조 방지
+    @OrderBy("id desc") //id순으로 정렬
     private List<Reply> reply;
 
     @CreationTimestamp

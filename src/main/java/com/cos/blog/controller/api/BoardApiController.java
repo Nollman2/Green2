@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cos.blog.config.auth.PrincipalDetail;
+import com.cos.blog.dto.ReplySaveRequestDto;
 import com.cos.blog.dto.ResponseDto;
 import com.cos.blog.model.Board;
+import com.cos.blog.model.Reply;
 import com.cos.blog.service.BoardService;
 
 @RestController
@@ -45,5 +47,30 @@ public class BoardApiController {
 		boardService.글수정하기(id,board);
 		return new ResponseDto<Integer>(HttpStatus.OK.value(),1);
 	}
+	
+	//댓글쓰기(Dto사용)
+	@PostMapping("/board/{boardId}/reply")
+	public ResponseDto<Integer> replySave(@RequestBody ReplySaveRequestDto replySaveRequestDto) {
+		
+		boardService.댓글쓰기(replySaveRequestDto);
+		return new ResponseDto<Integer>(HttpStatus.OK.value(),1);
+	}
+	
+	//댓글쓰기(Dto미사용)	
+	//한번에 많은자료를 넣을 때 Dto를 사용안하면 코드가 지저분해 짐
+	@PostMapping("/board/{boardId}/reply0")
+	public ResponseDto<Integer> replySave(@PathVariable int boardId, @RequestBody Reply reply, @AuthenticationPrincipal PrincipalDetail principal) {
+		
+		boardService.댓글쓰기0(boardId, reply, principal.getUser());
+		return new ResponseDto<Integer>(HttpStatus.OK.value(),1);
+	}
+	
+	//댓글삭제
+	@DeleteMapping("/board/{boardId}/reply/{replyId}")
+	public ResponseDto<Integer> replyDelete(@PathVariable int replyId) {
+		boardService.댓글삭제(replyId);
+		return new ResponseDto<Integer>(HttpStatus.OK.value(),1);
+	}
+	
 
 }

@@ -7,15 +7,25 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.cos.blog.dto.ReplySaveRequestDto;
 import com.cos.blog.model.Board;
+import com.cos.blog.model.Reply;
 import com.cos.blog.model.Users;
 import com.cos.blog.repository.BoardRepository;
+import com.cos.blog.repository.ReplyRepository;
+import com.cos.blog.repository.UserRepository;
 
 @Service
 public class BoardService {
 	
 	@Autowired
 	private BoardRepository boardRepository;
+	
+	@Autowired
+	private UserRepository userRepository;
+	
+	@Autowired
+	private ReplyRepository replyRepository;
 	
 	//글쓰기
 	@Transactional
@@ -56,6 +66,52 @@ public class BoardService {
 		board.setTitle(requestBoard.getTitle());
 		board.setContent(requestBoard.getContent());
 	
+	}
+	
+	//댓글쓰기(Dto사용)
+	@Transactional
+	public void 댓글쓰기(ReplySaveRequestDto replySaveRequestDto) {
+		
+		Users user = userRepository.findById(replySaveRequestDto.getUserId()).orElseThrow(() -> {
+			return new IllegalArgumentException("댓글쓰기실패");
+		});
+		
+		Board board = boardRepository.findById(replySaveRequestDto.getBoardId()).orElseThrow(()-> {
+			return new IllegalArgumentException("댓글쓰기실패");
+		});
+		
+		//build()를 이용하는 방법
+		Reply reply = Reply.builder()
+				.users(user)
+				.board(board)
+				.content(replySaveRequestDto.getContent())
+				.build();
+		
+		//Reply에 update매서드를 만들어 입력하는 방법
+		Reply reply2 = new Reply();
+		reply2.update(user, board, replySaveRequestDto.getContent());
+				
+		replyRepository.save(reply2);		
+	}
+	
+	//댓글쓰기(Dto미사용)
+	@Transactional
+	public void 댓글쓰기0(int boardId,Reply requestReply,Users user) {
+				
+		Board board = boardRepository.findById(boardId).orElseThrow(()-> {
+			return new IllegalArgumentException("댓글쓰기실패");
+		});
+		
+		requestReply.setUsers(user);
+		requestReply.setBoard(board);
+		
+		replyRepository.save(requestReply);		
+	}
+	
+	//댓글삭제
+	@Transactional
+	public void 댓글삭제(int replyId) {
+		replyRepository.deleteById(replyId);
 	}
 
 }
