@@ -40,8 +40,7 @@ public class UserController {
 	@GetMapping("/auth/findId")
 	public String fidId() {
 		return "user/findId";
-	}
-	
+	}	
 
 	//비밀번호재발급페이지
 	@GetMapping("/auth/findpwd")

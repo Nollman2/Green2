@@ -11,6 +11,9 @@ let index ={
 		$("#btn-findId").on("click",()=>{					
 			this.findId();
 		});
+		$("#btn-findpwd").on("click", () => {			
+			this.findpwd();
+		});
 	},
 	
 	saveCheck: function() {
@@ -225,6 +228,30 @@ let index ={
 			alert(JSON.stringify(error));
 		});
 				
+	},
+	
+	findpwd: function() {
+
+		let data = {
+			username: $("#username").val(),
+			email: $("#email").val()
+		};
+		
+		console.log(data);
+
+		$.ajax({
+			type: "POST",
+			url: "/auth/findpwd",
+			data:JSON.stringify(data),
+			contentType:"application/json; charset=utf-8",
+			dataType:"json"
+			}).done(function(resp){
+			alert("비밀번호가 재발급되었습니다");
+			location.href="/";
+			}).fail(function(error){
+				alert(JSON.stringify(error));
+			});
+
 	},
 	
 	

@@ -11,8 +11,7 @@
 		</div>
 		<button type="submit" id="btn-findId"class="btn btn-primary">아이디찾기</button>		
 		<br><br>
-	
-	<div class="searchresult">${board.username}</div>
+		
 </div>
 
 <script src="/js/user.js"></script>

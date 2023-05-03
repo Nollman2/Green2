@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cos.blog.dto.ResponseDto;
+import com.cos.blog.dto.SendTmpPwdDto;
 import com.cos.blog.model.Users;
 import com.cos.blog.service.UserService;
 
@@ -76,4 +77,19 @@ public class UserApiController {
 		
 		return new ResponseDto<String>(HttpStatus.OK.value(), i);
 	}
+	
+	// 비밀번호 재발급
+	@PostMapping("/auth/findpwd")
+	public ResponseDto<Integer> find(@RequestBody SendTmpPwdDto dto) {
+		int i = 0;
+		
+		if(userService.비밀번호재발급(dto.getUsername(), dto.getEmail()) !=null) {			
+			userService.sendTmpPwd(dto);			
+			i=userService.비밀번호재발급(dto.getUsername(), dto.getEmail()).getId();
+		}
+		System.out.println(i);		
+		
+		return new ResponseDto<Integer>(HttpStatus.OK.value(), i);
+	}
+
 }
