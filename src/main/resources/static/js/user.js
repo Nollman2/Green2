@@ -14,6 +14,16 @@ let index ={
 		$("#btn-findpwd").on("click", () => {			
 			this.findpwd();
 		});
+		$("#btn-out").on("click", () => {	
+			if (confirm("정말로 탈퇴하시겠습니까?") == true) {
+				this.out();
+			}else{
+				alert("탈퇴가 취소되었습니다");
+				return;
+			};
+					
+			
+		});
 	},
 	
 	saveCheck: function() {
@@ -253,6 +263,21 @@ let index ={
 			});
 
 	},
+	
+	out: function() {		
+		var id = $("#id").val();
+
+		$.ajax({
+			type: "DELETE",
+			url: "/user/out/" + id,
+			dataType: "json"
+		}).done(function(resp) {
+			location.href = "/logout";
+		}).fail(function(error) {
+			alert(JSON.stringify(error));
+		});
+	},
+
 	
 	
 	

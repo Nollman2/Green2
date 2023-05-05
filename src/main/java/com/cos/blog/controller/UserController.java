@@ -139,9 +139,9 @@ public class UserController {
 				String.class
 				);
 		
-		// 세번째과정 : 조회한 정보를 토대로 DB에 저장 혹은 조회 후 로그인 
-		//response2에는 토큰을이용해 조회한 사용자의 정보가 들어있음
-		//정보를 토대로 DB를 통해 회원가입 또는 로그인을 진행함
+		
+		// 세번째과정 : 정보를 토대로 DB에 회원가입 또는 로그인을 진행함
+		// response2에는 토큰을이용해 조회한 사용자의 정보가 들어있음		
 		ObjectMapper objectMapper2 = new ObjectMapper();
 		KakaoProfile kakaoProfile = null;
 		try {
@@ -155,9 +155,7 @@ public class UserController {
 		Users kakaoUser = Users.builder()
 				.username(kakaoProfile.getKakao_account().getEmail()+"_"+kakaoProfile.getId())
 				.password(cosKey)
-				.email(kakaoProfile.getKakao_account().getEmail())
-				.birth("null")
-				.tel("null")
+				.email(kakaoProfile.getKakao_account().getEmail())				
 				.username2(kakaoProfile.getProperties().getNickname())
 				.oauth("kakao")
 				.build();
@@ -167,10 +165,11 @@ public class UserController {
 		System.out.println(originUser);
 		
 		 if(originUser.getUsername() == null) {
-		 System.out.println("기존 회원이 아닙니다..........."); 
+		 System.out.println("기존 회원이 아닙니다"); 
 		 userService.회원가입(kakaoUser); 
 		 }
 		 
+		// 로그인 처리
 		 Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(kakaoUser.getUsername(),cosKey));
 		 SecurityContextHolder.getContext().setAuthentication(authentication);
 			

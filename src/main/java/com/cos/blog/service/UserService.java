@@ -57,6 +57,12 @@ public class UserService {
 		persistance.setEmail(user.getEmail());
 	}		
 	
+	// 회원 탈퇴
+	@Transactional
+	public void 회원탈퇴(int id) {
+		userRepository.deleteById(id);
+	}
+	
 	// 아이디찾기
 	public Users 아이디찾기(Users user) {		
 		

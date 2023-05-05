@@ -7,6 +7,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -65,6 +67,13 @@ public class UserApiController {
 		
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
 		
+	}
+	
+	// 회원 탈퇴
+	@DeleteMapping("/user/out/{id}")
+	public ResponseDto<Integer> deleteById(@PathVariable int id) {
+		userService.회원탈퇴(id);
+		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
 	}
 	
 	// 아이디찾기
