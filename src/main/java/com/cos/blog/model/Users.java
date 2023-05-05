@@ -58,6 +58,8 @@ public class Users {
 	@Column(nullable = true, length = 30)
 	private String email;	//이메일		
 	
+	private String oauth; //Kakao 회원판별
+	
 	//직접입력하지 않고 enum RoleType의 테이터를 이용
 	//RoleType은 데이터베이스에서 인식할수 없음 EnumType.STRING으로 알려줌)
 	@Enumerated(EnumType.STRING)

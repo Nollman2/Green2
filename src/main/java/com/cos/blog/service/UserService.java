@@ -128,6 +128,17 @@ public class UserService {
 		user.setPassword(encodeer.encode(tmpPwd));
 		System.out.println(tmpPwd);
 	}
+	
+	@Transactional
+	public Users 회원찾기(String username) {
+
+		// orElseGet-회원을 찾았는데 없으면 빈 객체를 리턴
+		Users user = userRepository.findByUsername(username).orElseGet(() -> {
+			return new Users();
+		});
+		return user;
+
+	}
 
 
 }
