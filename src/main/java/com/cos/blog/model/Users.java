@@ -19,22 +19,22 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Table(name="users2")
+@Table(name="users22")
 @Data //Getter Setter생성
 @NoArgsConstructor //빈생성자
 @AllArgsConstructor //전체생성자
 @Builder //빌더패턴
 @Entity	//user 클래스가 자동으로 db에 테이블이 생성된다.
 @SequenceGenerator(	//시퀀스생성
-		name = "USER2_SEQ_GENERATOR"
-		, sequenceName = "USER2_SEQ"
+		name = "USER22_SEQ_GENERATOR"
+		, sequenceName = "USER22_SEQ"
 		, initialValue = 1
 		, allocationSize = 1
 		)
 
 public class Users {
 	@Id	//Primary Key
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "USER2_SEQ_GENERATOR")
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "USER22_SEQ_GENERATOR")
 	private int id;	//시퀀스
 	
 	@Column(nullable = false, length = 30, unique = true) //공백불가 중복불가

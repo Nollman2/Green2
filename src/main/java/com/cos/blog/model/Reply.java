@@ -22,21 +22,21 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Table(name = "reply2")
+@Table(name = "reply22")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @SequenceGenerator(
-        name = "REPLY2_SEQ_GENERATOR3",
-        sequenceName = "REPLY2_SEQ3",
+        name = "REPLY22_SEQ_GENERATOR3",
+        sequenceName = "REPLY22_SEQ3",
         initialValue = 1,
         allocationSize = 1
 )
 @Entity
 public class Reply {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "REPLY2_SEQ_GENERATOR3")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "REPLY22_SEQ_GENERATOR3")
     private int id;
 
     @Column(nullable = false, length = 200)

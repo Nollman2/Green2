@@ -1,5 +1,7 @@
 package com.cos.blog.service;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -113,5 +115,42 @@ public class BoardService {
 	public void 댓글삭제(int replyId) {
 		replyRepository.deleteById(replyId);
 	}
+	
+	/*
+	// 게시글 검색 기능
+    @Transactional
+    public Page<Board> searchPosts(String keyword, Pageable pageable) {
+        return boardRepository.findByTitleContaining(keyword, pageable);
 
+    }
+    @Transactional
+    public Page<Board> searchPosts1(String keyword, Pageable pageable) {
+        return boardRepository.findByContentContaining(keyword, pageable);
+
+    }
+	*/
+	
+	// 게시글 검색
+	@Transactional
+	public Page<Board> searchpost(String keyword, String searchtype, Pageable pageable) {
+		
+		Page<Board> listboard = null;
+
+		switch (searchtype) {
+			case "title": {
+				listboard = boardRepository.findByTitleContaining(keyword, pageable); //  리스트로 받음
+				System.out.println("게시글 검색 title" +listboard);
+				break;
+			}
+			case "content": {
+				listboard = boardRepository.findByContentContaining(keyword, pageable);
+				System.out.println("게시글 검색 content" +listboard);
+				break;
+			}			
+			
+		}
+
+		return listboard;
+	}
+	
 }

@@ -27,15 +27,15 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Table(name = "board2")
+@Table(name = "board22")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Entity //테이블생성
 @SequenceGenerator( //시퀀스생성
-        name = "FREE2_SEQ_GENERATOR6",
-        sequenceName = "FREE2_SEQ6",
+        name = "FREE22_SEQ_GENERATOR6",
+        sequenceName = "FREE22_SEQ6",
         initialValue = 1,
         allocationSize = 1
 )
@@ -43,7 +43,7 @@ import lombok.NoArgsConstructor;
 public class Board {
 	
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "FREE2_SEQ_GENERATOR6")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "FREE22_SEQ_GENERATOR6")
     private int id;
 
     @Column(nullable = false, length = 100)
