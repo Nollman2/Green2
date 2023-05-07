@@ -100,5 +100,14 @@ public class UserApiController {
 		
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), i);
 	}
+	
+	// 인증번호 발송
+	@PostMapping("/auth/joinnumber")
+	public ResponseDto<String> joinnumber(@RequestBody String email) {
+
+		String joinNumber = userService.sendJoinNumber(email);
+
+		return new ResponseDto<String>(HttpStatus.OK.value(), joinNumber);
+	}
 
 }

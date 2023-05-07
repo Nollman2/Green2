@@ -126,23 +126,19 @@ let index ={
 			return false;
 		};
 
-/*
+
 		if (number.value == "") {
-			document.getElementById('numbererror').innerHTML = "인증번호를 입력해주세요"
+			alert("인증번호를 입력해주세요");
 			number.focus();
 			return false;
-		} else {
-			document.getElementById('numbererror').innerHTML = ""
 		};
 
 		if (number.value !== code) {
-			document.getElementById('numbererror').innerHTML = "인증번호가 일치하지 않습니다"
+			alert("인증번호가 일치하지 않습니다");
 			number.focus();
 			return false;
-		} else {
-			document.getElementById('numbererror').innerHTML = ""
 		};
-*/
+
 
 		if (!agree1.checked) {
 			alert("약관동의를 체크하세요");
@@ -318,4 +314,44 @@ function selectAll(selectAll) {
 	checkboxes.forEach((checkbox) => {
 		checkbox.checked = selectAll.checked;
 	})
+}
+
+//인증번호 발송
+var code;
+
+function joinNumber() {
+
+	var email = document.getElementById('email');
+
+	if (email.value == "") {
+		alert("이메일을 입력해주세요");
+		email.focus();
+		return false;
+	}; 
+	
+	var emailCheck = /^(?=.*[a-z])[a-z0-9]{1,12}@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+
+	if (!emailCheck.test(email.value)) {
+		alert("정확한 이메일을 입력해주세요");
+		email.focus();
+		return false;
+	}; 
+
+	var email = document.getElementById('email').value;
+	alert("인증번호가 발송되었습니다.");
+
+	$.ajax({
+		type: "POST",
+		url: "/auth/joinnumber", //auth
+		data: email,
+		contentType: "application/json; charset=utf-8",
+		dataType: "json"
+	}).done(function(resp) {
+		code = resp.data;
+
+	}).fail(function(error) {
+		alert("이메일을 다시 확인해주세요");
+	});
+
+
 }

@@ -3,6 +3,13 @@ package com.cos.blog.service;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.mail.MailAuthenticationException;
+import org.springframework.mail.MailException;
+import org.springframework.mail.MailParseException;
+import org.springframework.mail.MailSendException;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -12,8 +19,11 @@ import com.cos.blog.model.Users;
 import com.cos.blog.repository.CheckUserRepository;
 import com.cos.blog.repository.UserRepository;
 
+import lombok.RequiredArgsConstructor;
+
 @Service
-public class UserService {
+@RequiredArgsConstructor
+public class UserService {		
 
 	@Autowired
 	private UserRepository userRepository;
@@ -91,6 +101,12 @@ public class UserService {
 		*/
 	}
 	
+	// 메일보내기 
+	@Value("${spring.mail.username}")
+	private String sendFrom;	
+	
+	private final JavaMailSender javaMailSender;
+	
 	// 임시패스워드 발송
 	@Transactional
 	public void sendTmpPwd(SendTmpPwdDto dto) {
@@ -105,17 +121,18 @@ public class UserService {
 		for (int i = 0; i < 10; i++) {
 			idx = (int) (charSet.length * Math.random());
 			tmpPwd += charSet[idx];
-		}		
+		}				
 		
-		/*
+		//메일 보내기
 		try {
 			SimpleMailMessage message = new SimpleMailMessage();
 			message.setTo(dto.getEmail());
 			message.setFrom(sendFrom);
-			message.setSubject("보금자리에서 발송된 임시 비밀번호 입니다.");
-			message.setText("안녕하세요.\n" + "보금자리 임시비밀번호 안내 관련 이메일 입니다.\n" + "임시 비밀번호를 발급하오니 로그인 하신 후\n"
+			message.setSubject("임시 비밀번호 입니다.");
+			message.setText("임시비밀번호 안내 관련 이메일 입니다.\n" + "임시 비밀번호를 발급하오니 로그인 하신 후\n"
 					+ "반드시 비밀번호를 변경해주시기 바랍니다.\n\n" + "임시 비밀번호 : " + tmpPwd);
 			javaMailSender.send(message);
+			
 		} catch (MailParseException e) {
 			e.printStackTrace();
 		} catch (MailAuthenticationException e) {
@@ -125,7 +142,7 @@ public class UserService {
 		} catch (MailException e) {
 			e.printStackTrace();
 		}
-		*/
+		
 		
 		Users user = userRepository.findByUsername(dto.getUsername()).orElseThrow(() -> {
 			return new IllegalArgumentException("임시 비밀번호 변경 실패: 사용자 이름을 찾을 수 없습니다.");
@@ -133,6 +150,7 @@ public class UserService {
 
 		user.setPassword(encodeer.encode(tmpPwd));
 		System.out.println(tmpPwd);
+		
 	}
 	
 	@Transactional
@@ -144,6 +162,42 @@ public class UserService {
 		});
 		return user;
 
+	}
+	
+	// 인증번호 발송
+	@Transactional
+	public String sendJoinNumber(String email) {
+
+		char[] charSet = new char[] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
+
+		String joinNumber = "";
+
+		int idx = 0;
+		for (int i = 0; i < 6; i++) {
+			idx = (int) (charSet.length * Math.random());
+			joinNumber += charSet[idx];
+		}
+
+		try {
+			SimpleMailMessage message = new SimpleMailMessage();
+			message.setTo(email);
+			message.setFrom(sendFrom);
+			message.setSubject("인증번호 입니다.");
+			message.setText("안녕하세요.\n" + "인증번호 안내 관련 이메일 입니다.\n" + "인증번호 : " + joinNumber);
+			javaMailSender.send(message);
+		} catch (MailParseException e) {
+			e.printStackTrace();
+		} catch (MailAuthenticationException e) {
+			e.printStackTrace();
+		} catch (MailSendException e) {
+			e.printStackTrace();
+		} catch (MailException e) {
+			e.printStackTrace();
+		}
+
+		System.out.println(joinNumber);
+
+		return joinNumber;
 	}
 
 

@@ -74,8 +74,14 @@ function findAddr(){
 		</div>			
 		<div class="form-group">
 			<label for="email">Email</label> 
-			<input type="email" class="form-control" placeholder="Enter Email" id="email">
+			<input type="email" class="form-control" placeholder="Enter Email" id="email"><br/>
+			<button id="btn-joinnumber" onclick="joinNumber()">인증번호받기</button>
 		</div>	
+		<div class="form-group">
+			<label for="number">인증번호</label> 
+			<input type="text" class="form-control" placeholder="인증번호를 입력해주세요" id="number">
+		</div>	
+		
 		
 		<div class="signUpcheck">
 			<input type="checkbox" name="agree" id="agreeAll" onclick="selectAll(this)" value="selectall">
