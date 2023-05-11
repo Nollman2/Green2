@@ -18,9 +18,10 @@ public class MainController {
 	@GetMapping("/")
 	public String index(Model model,@PageableDefault(size= 5, sort = "id",
 			direction = Sort.Direction.DESC) Pageable pageable) {
-		//id기준으로 3개씩 페이징해서 보여줌		
+		//id기준으로 5개씩 페이징해서 보여줌		
 		
-		model.addAttribute("boards",boardService.글목록(pageable));
+		model.addAttribute("boards",boardService.글목록(pageable));		
+		
 		//boardService.글목록()의 리턴값을 boards라는 이름으로 index.jsp에 넣어줌
 		//리턴받은 boards의 객체는 List<Board>타입이다 BoardService에서 확인 
 		return "index";
