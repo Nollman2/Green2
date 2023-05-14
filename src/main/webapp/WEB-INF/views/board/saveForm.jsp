@@ -11,7 +11,7 @@
 		</div>
 		<div class="form-group">
 			<label for="content">Content:</label>
-			<textarea class="form-control summernote" rows="5" id="content"></textarea>
+			<textarea class="form-control summernote" id="content"></textarea>
 		</div>
 	</form>
 	<button id="btn-save" class="btn btn-primary">저장</button>
@@ -21,7 +21,7 @@
 <br />
 
 <script>
-	$('.summernote').summernote({tabsize : 2, height : 300});
+	$('.summernote').summernote({tabsize : 2, height : 500});
 </script>
 
 <%@ include file="../layout/footer.jsp"%>

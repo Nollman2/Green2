@@ -54,8 +54,8 @@ font-weight : bold;
 				<li class="page-item"><a class="page-link"	href="?page=0">First</a></li>
 				<li class="page-item"><a class="page-link" href="?page=${boards.number-1}">Previous</a></li>
 			</c:otherwise>
-		</c:choose>
-		
+		</c:choose>	
+			
 		<c:choose>
 			<c:when test="${boards.first}">					
 				<li class="page-item" id="currentpage"><a class="page-link" href="?page=0">1</a></li>				
@@ -63,6 +63,11 @@ font-weight : bold;
 				<li class="page-item"><a class="page-link" href="?page=2">3</a></li>
 				<li class="page-item"><a class="page-link" href="?page=3">4</a></li>
 				<li class="page-item"><a class="page-link" href="?page=4">5</a></li>
+				<li class="page-item"><a class="page-link" href="?page=5">6</a></li>
+				<li class="page-item"><a class="page-link" href="?page=6">7</a></li>
+				<li class="page-item"><a class="page-link" href="?page=7">8</a></li>
+				<li class="page-item"><a class="page-link" href="?page=8">9</a></li>
+				<li class="page-item"><a class="page-link" href="?page=9">10</a></li>
 			</c:when>
 			<c:when test="${boards.number == 1}">					
 				<li class="page-item"><a class="page-link" href="?page=0">1</a></li>				
@@ -70,29 +75,115 @@ font-weight : bold;
 				<li class="page-item"><a class="page-link" href="?page=2">3</a></li>
 				<li class="page-item"><a class="page-link" href="?page=3">4</a></li>
 				<li class="page-item"><a class="page-link" href="?page=4">5</a></li>
-			</c:when>			
-			<c:when test="${boards.number+1 == boards.getTotalPages()-1}">				
+				<li class="page-item"><a class="page-link" href="?page=5">6</a></li>
+				<li class="page-item"><a class="page-link" href="?page=6">7</a></li>
+				<li class="page-item"><a class="page-link" href="?page=7">8</a></li>
+				<li class="page-item"><a class="page-link" href="?page=8">9</a></li>
+				<li class="page-item"><a class="page-link" href="?page=9">10</a></li>
+			</c:when>
+			<c:when test="${boards.number == 2}">					
+				<li class="page-item"><a class="page-link" href="?page=0">1</a></li>				
+				<li class="page-item"><a class="page-link" href="?page=1">2</a></li>
+				<li class="page-item" id="currentpage"><a class="page-link" href="?page=2">3</a></li>
+				<li class="page-item"><a class="page-link" href="?page=3">4</a></li>
+				<li class="page-item"><a class="page-link" href="?page=4">5</a></li>
+				<li class="page-item"><a class="page-link" href="?page=5">6</a></li>
+				<li class="page-item"><a class="page-link" href="?page=6">7</a></li>
+				<li class="page-item"><a class="page-link" href="?page=7">8</a></li>
+				<li class="page-item"><a class="page-link" href="?page=8">9</a></li>
+				<li class="page-item"><a class="page-link" href="?page=9">10</a></li>
+			</c:when>
+			<c:when test="${boards.number == 3}">					
+				<li class="page-item"><a class="page-link" href="?page=0">1</a></li>				
+				<li class="page-item"><a class="page-link" href="?page=1">2</a></li>
+				<li class="page-item"><a class="page-link" href="?page=2">3</a></li>
+				<li class="page-item"  id="currentpage"><a class="page-link" href="?page=3">4</a></li>
+				<li class="page-item"><a class="page-link" href="?page=4">5</a></li>
+				<li class="page-item"><a class="page-link" href="?page=5">6</a></li>
+				<li class="page-item"><a class="page-link" href="?page=6">7</a></li>
+				<li class="page-item"><a class="page-link" href="?page=7">8</a></li>
+				<li class="page-item"><a class="page-link" href="?page=8">9</a></li>
+				<li class="page-item"><a class="page-link" href="?page=9">10</a></li>
+			</c:when>	
+			
+			<c:when test="${boards.number+1 == boards.getTotalPages()-4}">						
+				<li class="page-item"><a class="page-link" href="?page=${boards.number-5}">${boards.number-4}</a></li>
+				<li class="page-item"><a class="page-link" href="?page=${boards.number-4}">${boards.number-3}</a></li>	
 				<li class="page-item"><a class="page-link" href="?page=${boards.number-3}">${boards.number-2}</a></li>			
 				<li class="page-item"><a class="page-link" href="?page=${boards.number-2}">${boards.number-1}</a></li>
 				<li class="page-item"><a class="page-link" href="?page=${boards.number-1}">${boards.number}</a></li>
 				<li class="page-item" id="currentpage"><a class="page-link" href="?page=${boards.number}">${boards.number+1}</a></li>	
-				<li class="page-item"><a class="page-link" href="?page=${boards.number+1}">${boards.number+2}</a></li>									
+				<li class="page-item"><a class="page-link" href="?page=${boards.number+1}">${boards.number+2}</a></li>
+				<li class="page-item"><a class="page-link" href="?page=${boards.number+2}">${boards.number+3}</a></li>	
+				<li class="page-item"><a class="page-link" href="?page=${boards.number+3}">${boards.number+4}</a></li>	
+				<li class="page-item"><a class="page-link" href="?page=${boards.number+4}">${boards.number+5}</a></li>													
+			</c:when>		
+			
+			<c:when test="${boards.number+1 == boards.getTotalPages()-3}">							
+				<li class="page-item"><a class="page-link" href="?page=${boards.number-6}">${boards.number-5}</a></li>
+				<li class="page-item"><a class="page-link" href="?page=${boards.number-5}">${boards.number-4}</a></li>
+				<li class="page-item"><a class="page-link" href="?page=${boards.number-4}">${boards.number-3}</a></li>	
+				<li class="page-item"><a class="page-link" href="?page=${boards.number-3}">${boards.number-2}</a></li>			
+				<li class="page-item"><a class="page-link" href="?page=${boards.number-2}">${boards.number-1}</a></li>
+				<li class="page-item"><a class="page-link" href="?page=${boards.number-1}">${boards.number}</a></li>
+				<li class="page-item" id="currentpage"><a class="page-link" href="?page=${boards.number}">${boards.number+1}</a></li>	
+				<li class="page-item"><a class="page-link" href="?page=${boards.number+1}">${boards.number+2}</a></li>
+				<li class="page-item"><a class="page-link" href="?page=${boards.number+2}">${boards.number+3}</a></li>	
+				<li class="page-item"><a class="page-link" href="?page=${boards.number+3}">${boards.number+4}</a></li>											
+			</c:when>			
+			
+			<c:when test="${boards.number+1 == boards.getTotalPages()-2}">						
+				<li class="page-item"><a class="page-link" href="?page=${boards.number-7}">${boards.number-6}</a></li>			
+				<li class="page-item"><a class="page-link" href="?page=${boards.number-6}">${boards.number-5}</a></li>
+				<li class="page-item"><a class="page-link" href="?page=${boards.number-5}">${boards.number-4}</a></li>
+				<li class="page-item"><a class="page-link" href="?page=${boards.number-4}">${boards.number-3}</a></li>	
+				<li class="page-item"><a class="page-link" href="?page=${boards.number-3}">${boards.number-2}</a></li>			
+				<li class="page-item"><a class="page-link" href="?page=${boards.number-2}">${boards.number-1}</a></li>
+				<li class="page-item"><a class="page-link" href="?page=${boards.number-1}">${boards.number}</a></li>
+				<li class="page-item" id="currentpage"><a class="page-link" href="?page=${boards.number}">${boards.number+1}</a></li>	
+				<li class="page-item"><a class="page-link" href="?page=${boards.number+1}">${boards.number+2}</a></li>
+				<li class="page-item"><a class="page-link" href="?page=${boards.number+2}">${boards.number+3}</a></li>												
+			</c:when>			
+									
+			<c:when test="${boards.number+1 == boards.getTotalPages()-1}">			
+				<li class="page-item"><a class="page-link" href="?page=${boards.number-8}">${boards.number-7}</a></li>
+				<li class="page-item"><a class="page-link" href="?page=${boards.number-7}">${boards.number-6}</a></li>			
+				<li class="page-item"><a class="page-link" href="?page=${boards.number-6}">${boards.number-5}</a></li>
+				<li class="page-item"><a class="page-link" href="?page=${boards.number-5}">${boards.number-4}</a></li>
+				<li class="page-item"><a class="page-link" href="?page=${boards.number-4}">${boards.number-3}</a></li>	
+				<li class="page-item"><a class="page-link" href="?page=${boards.number-3}">${boards.number-2}</a></li>			
+				<li class="page-item"><a class="page-link" href="?page=${boards.number-2}">${boards.number-1}</a></li>
+				<li class="page-item"><a class="page-link" href="?page=${boards.number-1}">${boards.number}</a></li>
+				<li class="page-item" id="currentpage"><a class="page-link" href="?page=${boards.number}">${boards.number+1}</a></li>	
+				<li class="page-item"><a class="page-link" href="?page=${boards.number+1}">${boards.number+2}</a></li>												
 			</c:when>				
 			<c:when test="${boards.number+1 == boards.getTotalPages()}">
+				<li class="page-item"><a class="page-link" href="?page=${boards.number-9}">${boards.number-8}</a></li>
+				<li class="page-item"><a class="page-link" href="?page=${boards.number-8}">${boards.number-7}</a></li>
+				<li class="page-item"><a class="page-link" href="?page=${boards.number-7}">${boards.number-6}</a></li>			
+				<li class="page-item"><a class="page-link" href="?page=${boards.number-6}">${boards.number-5}</a></li>
+				<li class="page-item"><a class="page-link" href="?page=${boards.number-5}">${boards.number-4}</a></li>
 				<li class="page-item"><a class="page-link" href="?page=${boards.number-4}">${boards.number-3}</a></li>
 				<li class="page-item"><a class="page-link" href="?page=${boards.number-3}">${boards.number-2}</a></li>			
 				<li class="page-item"><a class="page-link" href="?page=${boards.number-2}">${boards.number-1}</a></li>
 				<li class="page-item"><a class="page-link" href="?page=${boards.number-1}">${boards.number}</a></li>
 				<li class="page-item" id="currentpage"><a class="page-link" href="?page=${boards.number}">${boards.number+1}</a></li>									
 			</c:when>
-			<c:otherwise>
+			
+			<c:otherwise>				
+				<li class="page-item"><a class="page-link" href="?page=${boards.number-4}">${boards.number-3}</a></li>
+				<li class="page-item"><a class="page-link" href="?page=${boards.number-3}">${boards.number-2}</a></li>
 				<li class="page-item"><a class="page-link" href="?page=${boards.number-2}">${boards.number-1}</a></li>
 				<li class="page-item"><a class="page-link" href="?page=${boards.number-1}">${boards.number}</a></li>
 				<li class="page-item" id="currentpage"><a class="page-link" href="?page=${boards.number}" >${boards.number+1}</a></li>				
 				<li class="page-item"><a class="page-link" href="?page=${boards.number+1}">${boards.number+2}</a></li>
-				<li class="page-item"><a class="page-link" href="?page=${boards.number+2}">${boards.number+3}</a></li>				
+				<li class="page-item"><a class="page-link" href="?page=${boards.number+2}">${boards.number+3}</a></li>	
+				<li class="page-item"><a class="page-link" href="?page=${boards.number+3}">${boards.number+4}</a></li>
+				<li class="page-item"><a class="page-link" href="?page=${boards.number+4}">${boards.number+5}</a></li>
+				<li class="page-item"><a class="page-link" href="?page=${boards.number+5}">${boards.number+6}</a></li>						
 			</c:otherwise>
-		</c:choose>	
+			
+		</c:choose>			 
 		
 		<c:choose>
 			<c:when test="${boards.last}">				
